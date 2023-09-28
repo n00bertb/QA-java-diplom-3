@@ -7,18 +7,15 @@ import org.junit.Assert;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertEquals;
 
 public class MainPage {
     private final SelenideElement personalAccountButton = $(byXpath(".//p[text()='Личный Кабинет']"));
     private final SelenideElement sauceButton = $(byXpath(".//span[text() = 'Соусы']"));
     private final SelenideElement bunButton = $(byXpath(".//span[text() = 'Булки']"));
     private final SelenideElement ingredientsButton = $(byXpath(".//span[text() = 'Начинки']"));
-    private final SelenideElement fluorescentBun = $(byXpath(".//p[text() = 'Флюоресцентная булка R2-D3']"));
-    private final SelenideElement sauce = $(byXpath(".//p[text() = 'Соус Spicy-X']"));
-    private final SelenideElement ingredients = $(byXpath(".//p[text() = 'Мясо бессмертных моллюсков Protostomia']"));
-
+    private final SelenideElement activeSection = $(byXpath(".//div[contains(@class, 'tab_tab_type_current__2BEPc')]"));
     private final SelenideElement enterText = $(byXpath(".//h2[text() = 'Вход']"));
-
     @Step("нажать на кнопку Булки")
     public MainPage clickBunButton() {
         sauceButton.click();
@@ -30,7 +27,7 @@ public class MainPage {
         sauceButton.click();
         return this;
     }
-    @Step("нажать на кнопку Соусы")
+    @Step("нажать на кнопку Индигриенты")
     public MainPage clickIngredientsButton() {
         ingredientsButton.click();
         return this;
@@ -45,19 +42,9 @@ public class MainPage {
         Assert.assertThat(enterText.getText(), containsString("Вход"));
         return this;
     }
-    @Step("Проверка перехода на вкладку Булки")
-    public MainPage checkingTransitionToBun() {
-        Assert.assertThat(fluorescentBun.getText(), containsString("Флюоресцентная булка R2-D3"));
-        return this;
-    }
-    @Step("Проверка перехода на вкладку Булки")
-    public MainPage checkingTransitionToSauce() {
-        Assert.assertThat(sauce.getText(), containsString("Соус Spicy-X"));
-        return this;
-    }
-    @Step("Проверка перехода на вкладку Булки")
-    public MainPage checkingTransitionToIngredients() {
-        Assert.assertThat(ingredients.getText(), containsString("Мясо бессмертных моллюсков Protostomia"));
-        return this;
+    @Step("Проверка перехода на нужную вкладку")
+    public void checkActiveSection(String section) {
+        String actual = activeSection.getText();
+        assertEquals(section,actual);
     }
 }

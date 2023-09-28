@@ -20,17 +20,17 @@ public class RedirectionTest extends TestBase{
     @Test
     @DisplayName("Переход на вкладку Булки")
     public void switchToTabBun() {
-        new MainPage().clickBunButton().checkingTransitionToBun();
+        new MainPage().clickBunButton().checkActiveSection("Булки");
     }
     @Test
     @DisplayName("Переход на вкладку Соусы")
     public void switchToTabSauces() {
-        new MainPage().clickSauceButton().checkingTransitionToSauce();
+        new MainPage().clickSauceButton().checkActiveSection("Соусы");
     }
     @Test
     @DisplayName("Переход на вкладку Начинки")
     public void switchToTabToppings() {
-        new MainPage().clickIngredientsButton().checkingTransitionToIngredients();
+        new MainPage().clickIngredientsButton().checkActiveSection("Начинки");
     }
 
     @After
